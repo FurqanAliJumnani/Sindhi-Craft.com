@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Artist Login — Sindhi Crafts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --accent: #7C3E25; 
+  --accent-2: #F1C27D; 
+  --muted: #F8F6F2;
+  --card: #FFF8F2;
+}
+body{font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background-color: var(--muted);}
+h1,h2,h3{font-family: 'Playfair Display', serif;}
+</style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
+  <h2 class="text-3xl font-bold text-[color:var(--accent)] mb-6 text-center">Artist Login</h2>
+  
+  <form id="loginForm" class="flex flex-col gap-4">
+    <input type="email" id="loginEmail" placeholder="Email" class="px-4 py-2 border rounded-md text-sm w-full" required>
+    <input type="password" id="loginPassword" placeholder="Password" class="px-4 py-2 border rounded-md text-sm w-full" required>
+    <button type="submit" class="bg-[color:var(--accent)] text-white py-2 rounded-md hover:opacity-90 transition">Login</button>
+  </form>
+
+  <p class="text-sm text-gray-600 mt-4 text-center">
+    New Artist? 
+    <a href="artist-register.html" class="text-[color:var(--accent)] font-semibold hover:underline">Register here</a>
+  </p>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  // Simple login check (replace with your backend)
+  const users = JSON.parse(localStorage.getItem('artists')) || [];
+  const user = users.find(u=>u.email===email && u.password===password);
+
+  if(user){
+    alert(`Welcome, ${user.name}!`);
+    // Redirect to artist dashboard or homepage
+    window.location.href = "artist-dashboard.html";
+  }else{
+    alert("Invalid email or password!");
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sindhi Crafts — Rural Crafts Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --accent: #7C3E25;
+  --accent-2: #F1C27D;
+  --muted: #F8F6F2;
+  --card: #FFF8F2;
+}
+body{font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+h1,h2,h3{font-family: 'Playfair Display', serif;}
+.ethnic-border{
+  border-top: 6px double var(--accent);
+  border-bottom: 6px double var(--accent-2);
+  box-shadow: inset 0 6px 8px rgba(124,62,37,0.04);
+}
+.hero-pattern{
+  background-image: radial-gradient(circle at 10% 20%, rgba(124,62,37,0.06), transparent 20%),
+                    radial-gradient(circle at 80% 70%, rgba(241,194,125,0.04), transparent 20%);
+}
+.motif::after{
+  content: "✺";
+  display:inline-block;
+  margin-left:6px;
+  color: rgba(124,62,37,0.9);
+  transform: rotate(12deg);
+}
+
+/* Toast animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn { animation: fadeIn .28s ease-out; transition: opacity .4s ease; }
+</style>
+</head>
+<body class="bg-[color:var(--muted)] text-gray-800">
+
+  <!-- Navigation -->
+  <header class="fixed w-full z-40 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#home" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-[color:var(--accent)] flex items-center justify-center text-white font-bold">
+            <img src="sindhi logo.png" alt="" class="w-9 h-9 object-contain">
+          </div>
+          <div>
+            <div class="text-lg font-semibold">Sindhi Crafts</div>
+            <div class="text-xs text-gray-500">Celebrating rural craftsmanship</div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="#home" class="hover:text-[color:var(--accent)]">Home</a>
+          <a href="#artists" class="hover:text-[color:var(--accent)]">Artists</a>
+          <a href="#about" class="hover:text-[color:var(--accent)]">About</a>
+          <a href="#contact" class="hover:text-[color:var(--accent)]">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <!-- Cart in header -->
+          <button id="openCart" class="relative bg-[color:var(--accent)] text-white px-3 py-1 rounded-lg text-sm">
+            🛒
+            <span id="cartCount" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+          </button>
+
+          <button id="openMenu" class="md:hidden p-2 rounded-md hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <a href="artist-login.html" class="hidden md:inline-block px-4 py-2 rounded-md text-sm font-medium border border-[color:var(--accent)] text-[color:var(--accent)]">For Artists</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobileNav" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 hidden">
+    <div class="bg-white w-64 h-full shadow-lg p-6">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-[color:var(--accent)] flex items-center justify-center text-white font-bold">HB</div>
+          <div>
+            <div class="font-semibold">Sindhi Crafts</div>
+            <div class="text-xs text-gray-500">Rural crafts</div>
+          </div>
+        </div>
+        <button id="closeMenu" class="p-2">✕</button>
+      </div>
+      <nav class="flex flex-col gap-3">
+        <a href="#home" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
+        <a href="#artists" class="py-2 px-3 rounded hover:bg-gray-50">Artists</a>
+        <a href="#about" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
+        <a href="#contact" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="pt-20">
+    <!-- Hero / Home -->
+    <section id="home" class="hero-pattern ethnic-border py-12">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[color:var(--accent)]">Sindhi Craftt</h1>
+            <p class="text-lg text-gray-700 mb-6">A curated marketplace showcasing rural artisans — pottery, embroidery, woodwork and more. Discover hand-made products and stories behind each craft.</p>
+            <div class="flex gap-3">
+              <a href="#products" class="inline-block px-5 py-3 rounded-md bg-[color:var(--accent)] text-white font-medium shadow">Shop All</a>
+              <a href="#artists" class="inline-block px-5 py-3 rounded-md border border-[color:var(--accent)] text-[color:var(--accent)]">Meet Artists</a>
+            </div>
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-lg bg-[color:var(--card)] p-4">
+            <img src="tiitle.jpg" alt="crafts" class="w-full h-64 object-cover rounded-lg">
+            <div class="mt-3 text-sm text-gray-600">Handmade arts from village artisans</div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="mt-10 bg-white rounded-lg p-5 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center gap-3 flex-wrap">
+              <button class="filter-btn px-3 py-2 rounded-full text-sm border" data-cat="all">All</button>
+              <button class="filter-btn px-3 py-2 rounded-full text-sm border" data-cat="pottery">Pottery</button>
+              <button class="filter-btn px-3 py-2 rounded-full text-sm border" data-cat="embroidery">Embroidery</button>
+              <button class="filter-btn px-3 py-2 rounded-full text-sm border" data-cat="woodwork">Woodwork</button>
+            </div>
+            <div class="flex items-center gap-3">
+              <input id="searchInput" type="search" placeholder="Search products or artists..." class="px-3 py-2 border rounded-md w-56 text-sm" />
+              <select id="sortSelect" class="px-3 py-2 border rounded-md text-sm">
+                <option value="default">Sort</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Products grid -->
+          <div id="products" class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artists -->
+    <section id="artists" class="py-12">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-semibold motif">Artists & Artisans</h2>
+          <div class="text-sm text-gray-600">Tap any artist to view profile & their work</div>
+        </div>
+
+        <div id="artistsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-12 bg-white">
+      <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
+        <h2 class="text-2xl font-semibold mb-3">About Sindhi Craftt</h2>
+        <p class="text-gray-700 mb-4">Sindhi Craftt is built to celebrate and support rural craftsmen — we showcase their products alongside their stories so customers know the people and techniques behind each handmade piece. We aim to create fair income channels and preserve cultural art forms.</p>
+        <ul class="list-disc pl-5 text-gray-700">
+          <li>Authentic handmade products directly from artisans.</li>
+          <li>Fair pricing and transparent artist profiles.</li>
+          <li>Workshops & seasonal pop-ups (coming soon).</li>
+        </ul>
+      </div>
+    </section>
+
+   <!-- Contact -->
+<section id="contact" class="py-16 bg-[color:var(--muted)]">
+  <div class="max-w-5xl mx-auto px-4 md:px-6 lg:px-8">
+    <h2 class="text-3xl font-semibold mb-3 text-[color:var(--accent)]">Contact Us</h2>
+    <p class="text-gray-700 mb-10 text-lg">
+      Have questions, feedback, or want to join as an artisan? We’d love to hear from you.
+    </p>
+
+    <!-- 🌟 Team Cards -->
+    <div class="space-y-5">
+      <!-- Card -->
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <img src="jawad.jpeg" alt="Jawad Ahmed" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Jawad Ahmed</h3>
+            <p class="text-gray-700 font-medium">Project Lead/Technical Support</p>
+            <p class="text-sm text-gray-600 mt-1">Email: 
+              <a href="mailto:jawad@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">ali@hunarbazaar.pk</a>
+            </p>
+            <p class="text-sm text-gray-600">Phone: 
+              <a href="tel:+923001234567" class="text-[color:var(--accent)] hover:underline">+92 300 3334567</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repeat for each team member -->
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <img src="mukhtiar.jpeg" alt="Mukhtiar Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Mukhtiar Soomro</h3>
+            <p class="text-gray-700 font-medium">Artisan Coordinator</p>
+            <p class="text-sm text-gray-600 mt-1">Email: 
+              <a href="mailto:mukhtiar@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">hina@hunarbazaar.pk</a>
+            </p>
+            <p class="text-sm text-gray-600">Phone: 
+              <a href="tel:+923001112233" class="text-[color:var(--accent)] hover:underline">+92 300 1212233</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <img src="alamgir.jpeg" alt="Alamgir Lund" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Alamgir Lund</h3>
+            <p class="text-gray-700 font-medium">Production Manager</p>
+            <p class="text-sm text-gray-600 mt-1">Email: 
+              <a href="mailto:almagir@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">rizwan@hunarbazaar.pk</a>
+            </p>
+            <p class="text-sm text-gray-600">Phone: 
+              <a href="tel:+923004445555" class="text-[color:var(--accent)] hover:underline">+92 300 3345555</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <img src="rania.jpg" alt="Marvi Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Marvi Soomro</h3>
+            <p class="text-gray-700 font-medium">Communication Manager</p>
+            <p class="text-sm text-gray-600 mt-1">Email: 
+              <a href="mailto:marvi@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">marvi@hunarbazaar.pk</a>
+            </p>
+            <p class="text-sm text-gray-600">Phone: 
+              <a href="tel:+923006667777" class="text-[color:var(--accent)] hover:underline">+92 300 6655777</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <img src="shams.jpeg" alt="Shams ulnisha" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Shams ulnisha</h3>
+            <p class="text-gray-700 font-medium">Design & Branding</p>
+            <p class="text-sm text-gray-600 mt-1">Email: 
+              <a href="mailto:imran@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">shams@hunarbazaar.pk</a>
+            </p>
+            <p class="text-sm text-gray-600">Phone: 
+              <a href="tel:+923008889999" class="text-[color:var(--accent)] hover:underline">+92 300 8889999</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <img src="rania.jpg" alt="Shazia Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+          
+            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Shazia Soomro</h3>
+            <p class="text-gray-700 font-medium">Community Outreach</p>
+            <p class="text-sm text-gray-600 mt-1">Email: 
+              <a href="mailto:shazia@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">shazia@hunarbazaar.pk</a>
+            </p>
+            <p class="text-sm text-gray-600">Phone: 
+              <a href="tel:+923009991111" class="text-[color:var(--accent)] hover:underline">+92 300 9991111</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 💌 Contact Form -->
+    <div class="mt-12 bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      <h3 class="text-xl font-semibold text-[color:var(--accent)] mb-4">Send Us a Message</h3>
+      <form id="contactForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" id="name" placeholder="Your name" class="px-4 py-2 border rounded-md w-full" required>
+          <input type="email" id="email" placeholder="Email address" class="px-4 py-2 border rounded-md w-full" required>
+        </div>
+        <textarea id="message" placeholder="Message" class="w-full px-4 py-2 border rounded-md" rows="4" required></textarea>
+        <div class="flex justify-end">
+          <button type="submit" class="px-6 py-2 rounded-md bg-[color:var(--accent)] text-white hover:opacity-90 transition">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+    <footer class="border-t bg-white py-6">
+      <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="text-sm text-gray-600">© Sindhi Craftt — Celebrating Crafts • Crafted with ❤️</div>
+        <div class="flex gap-3 text-sm">
+          <a href="#" class="hover:underline">Privacy</a>
+          <a href="#" class="hover:underline">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Product detail modal -->
+  <div id="productModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-3xl w-full shadow-lg overflow-hidden">
+      <div class="p-4 flex justify-between items-start">
+        <div>
+          <h3 id="modalTitle" class="text-xl font-semibold"></h3>
+          <div id="modalArtist" class="text-sm text-gray-600"></div>
+        </div>
+        <button id="closeModal" class="text-gray-600">✕</button>
+      </div>
+      <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <img id="modalImage" src="" alt="" class="w-full h-64 object-cover rounded-md md:col-span-1">
+        <div class="md:col-span-2">
+          <p id="modalDesc" class="text-gray-700 mb-3"></p>
+          <div class="text-lg font-semibold mb-3">Price: <span id="modalPrice"></span></div>
+          <div class="flex gap-3">
+            <button id="modalAddToCart" class="px-4 py-2 rounded border">Add to Cart</button>
+            <button id="modalBuyNow" class="px-4 py-2 rounded bg-[color:var(--accent)] text-white">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div id="cartSidebar" class="fixed top-0 right-0 h-full w-96 bg-white shadow-lg transform translate-x-full transition z-50 flex flex-col">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h3 class="text-lg font-semibold text-[color:var(--accent)]">Your Cart</h3>
+      <button id="closeCartSidebar" class="text-gray-600 hover:text-gray-800">✕</button>
+    </div>
+
+    <div id="cartItemsSidebar" class="p-4 space-y-2 overflow-y-auto flex-1"></div>
+
+    <div class="p-4 border-t">
+      <div class="flex justify-between font-bold text-gray-800 mb-4">
+        <span>Total:</span>
+        <span id="cartTotalSidebar">PKR 0</span>
+      </div>
+
+      <!-- Checkout section -->
+      <div class="flex flex-col gap-2">
+        <span class="font-semibold text-gray-700">Checkout via:</span>
+        <button id="checkoutWhatsapp" class="w-full bg-green-500 text-white py-2 rounded-md hover:opacity-90 transition">WhatsApp</button>
+        <button id="checkoutInstagram" class="w-full bg-pink-500 text-white py-2 rounded-md hover:opacity-90 transition">Instagram</button>
+        <div class="mt-3">
+          <button id="clearCart" class="w-full bg-red-600 text-white py-2 rounded-md hover:opacity-90 transition">Clear Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="fixed bottom-4 right-4 space-y-2 z-50"></div>
+
+<script>
+/* === Artist Data === */
+const artists = [
+  { id: 1, name: 'Bhagwati', region: 'Sindh', craft: 'Pottery', bio: 'A third-generation potter using natural glazes.' },
+  { id: 2, name: 'Asifa Chandio', region: 'Sindh', craft: 'Embroidery', bio: 'Specializes in fine-thread Sindhi shawls.' },
+  { id: 3, name: 'Saleh Memon', region: 'Sindh', craft: 'Woodwork', bio: 'Creates hand-carved boxes and furniture.' }
+];
+
+/* === Product Data Loader === */
+const categories = ['pottery', 'embroidery', 'woodwork'];
+const container = document.getElementById('products');
+
+/* === Utility: Toast === */
+const showToast = (message, duration=3000) => {
+  const toastContainer = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.className = "bg-[color:var(--accent)] text-white px-4 py-2 rounded shadow-lg opacity-90 animate-fadeIn";
+  toastContainer.appendChild(toast);
+  setTimeout(()=> {
+    toast.style.opacity = 0;
+    setTimeout(()=> toast.remove(), 500);
+  }, duration);
+};
+
+/* === Cart Management (persisted) === */
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const saveCart = ()=> localStorage.setItem('cart', JSON.stringify(cart));
+const updateCartCount = ()=> document.getElementById('cartCount').textContent = cart.reduce((a,i)=>a+i.quantity,0);
+const updateCartTotal = ()=> document.getElementById('cartTotalSidebar').textContent = `PKR ${cart.reduce((a,i)=>a + i.price * i.quantity,0)}`;
+
+/* Add/remove/update */
+const addToCartItem = (product) => {
+  const found = cart.find(p=>p.id===product.id);
+  if(found) found.quantity++;
+  else cart.push({...product, quantity:1});
+  saveCart(); renderCartSidebar(); showToast(`${product.title} added to cart`);
+};
+const removeFromCart = (id) => { cart = cart.filter(p=>p.id!==id); saveCart(); renderCartSidebar(); };
+const clearCart = () => { cart = []; saveCart(); renderCartSidebar(); showToast('Cart cleared'); };
+
+/* === Render Cart Sidebar === */
+function renderCartSidebar(){
+  const div = document.getElementById('cartItemsSidebar');
+  if(cart.length === 0){
+    div.innerHTML = `<p class="text-gray-600">Your cart is empty.</p>`;
+  } else {
+    div.innerHTML = cart.map(item=>`
+      <div class="flex justify-between items-center py-2 border-b">
+        <div>
+          <p class="font-semibold">${item.title}</p>
+          <p class="text-sm text-gray-600">Qty: ${item.quantity}</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <p class="font-bold text-amber-700">PKR ${item.price * item.quantity}</p>
+          <button data-id="${item.id}" class="remove-btn text-red-500 hover:underline">Remove</button>
+        </div>
+      </div>
+    `).join('');
+    // attach remove listeners
+    document.querySelectorAll('.remove-btn').forEach(b=>b.addEventListener('click', ()=> removeFromCart(b.dataset.id)));
+  }
+  updateCartCount(); updateCartTotal();
+}
+
+/* === Generate Products (jpeg default) === */
+const generateProducts = () => {
+  let products = [];
+  categories.forEach((cat, index) => {
+    const artist = artists[index];
+    for (let i = 1; i <= 10; i++) {
+      products.push({
+        id: `${cat}-${i}`,
+        title: `${cat.charAt(0).toUpperCase() + cat.slice(1)} ${i}`,
+        category: cat,
+        price: 1000 + i * 50,
+        image: `assets/${cat}/${i}.jpeg`, // default .jpeg; fallback in <img>
+        artistId: artist.id,
+        desc: `Authentic ${cat} handcrafted by ${artist.name} from ${artist.region}.`
+      });
+    }
+  });
+  return products;
+};
+
+/* === Render Products (with jpeg->jpg fallback in the img onerror) === */
+let currentProducts = [];
+const renderProducts = (products, filter='all', sort='default')=>{
+  currentProducts = products;
+  let filtered = filter === 'all' ? products.slice() : products.filter(p => p.category === filter);
+
+  // search
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if(q) filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+
+  // sorting
+  if(sort === 'price-asc') filtered.sort((a,b)=>a.price-b.price);
+  if(sort === 'price-desc') filtered.sort((a,b)=>b.price-a.price);
+
+  if(filtered.length === 0){
+    container.innerHTML = `<p class="col-span-full text-center text-gray-600">No products found.</p>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(p=>{
+    const artist = artists.find(a => a.id === p.artistId);
+    // use onerror in img to fallback to .jpg if .jpeg missing
+    return `
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        <img src="${p.image}" alt="${p.title}" class="h-56 w-full object-cover"
+             onerror="this.onerror=null; this.src='assets/${p.category}/${p.id.split('-')[1]}.jpg'">
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">${p.title}</h3>
+          <p class="text-sm text-gray-600 mb-2">${p.desc}</p>
+          <p class="text-sm text-gray-500 italic mb-1">By ${artist.name} • ${artist.craft}</p>
+          <p class="text-amber-700 font-bold mb-3">PKR ${p.price}</p>
+          <div class="flex gap-2">
+            <button data-id="${p.id}" class="add-btn bg-[color:var(--accent)] text-white px-4 py-2 rounded-lg hover:opacity-90 transition">Add to Cart</button>
+            <button data-id="${p.id}" class="view-btn bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300 transition">View Details</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // attach add-to-cart handlers (use data-id to find product)
+  document.querySelectorAll('.add-btn').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const prod = currentProducts.find(p=>p.id===id);
+      if(prod) addToCartItem(prod);
+    });
+  });
+
+  // attach view-details handlers to open modal
+  document.querySelectorAll('.view-btn').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const prod = currentProducts.find(p=>p.id===id);
+      if(prod) openProductModal(prod);
+    });
+  });
+};
+
+/* === Product Modal === */
+function openProductModal(p){
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalArtist').textContent = artists.find(a=>a.id===p.artistId).name;
+  document.getElementById('modalImage').src = p.image;
+  document.getElementById('modalImage').onerror = function(){ this.onerror=null; this.src=`assets/${p.category}/${p.id.split('-')[1]}.jpg`; };
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalPrice').textContent = `PKR ${p.price}`;
+  document.getElementById('productModal').classList.remove('hidden');
+  // set modal add-to-cart action
+  document.getElementById('modalAddToCart').onclick = ()=>{ addToCartItem(p); document.getElementById('productModal').classList.add('hidden'); };
+  document.getElementById('modalBuyNow').onclick = ()=>{ addToCartItem(p); document.getElementById('productModal').classList.add('hidden'); openCartSidebar(); };
+}
+document.getElementById('closeModal').addEventListener('click', ()=> document.getElementById('productModal').classList.add('hidden'));
+
+/* === Filters & Sorting & Search === */
+document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click', ()=>{
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('bg-[color:var(--accent)]','text-white'));
+  btn.classList.add('bg-[color:var(--accent)]','text-white');
+  renderProducts(currentProducts, btn.dataset.cat, document.getElementById('sortSelect').value);
+}));
+document.getElementById('sortSelect').addEventListener('change', (e)=>{
+  const activeFilter = document.querySelector('.filter-btn.bg-[color\\:var\\(--accent\\)]');
+  const filter = activeFilter ? activeFilter.dataset.cat : 'all';
+  renderProducts(currentProducts, filter, e.target.value);
+});
+document.getElementById('searchInput').addEventListener('input', ()=> {
+  const activeFilter = document.querySelector('.filter-btn.bg-[color\\:var\\(--accent\\)]');
+  const filter = activeFilter ? activeFilter.dataset.cat : 'all';
+  renderProducts(currentProducts, filter, document.getElementById('sortSelect').value);
+});
+
+/* === Cart Sidebar toggle helpers === */
+const openCartSidebar = ()=> document.getElementById('cartSidebar').classList.remove('translate-x-full');
+const closeCartSidebar = ()=> document.getElementById('cartSidebar').classList.add('translate-x-full');
+document.getElementById('openCart').addEventListener('click', openCartSidebar);
+document.getElementById('closeCartSidebar').addEventListener('click', closeCartSidebar);
+
+/* === Mobile menu toggles === */
+document.getElementById('openMenu').addEventListener('click', ()=> document.getElementById('mobileNav').classList.remove('hidden'));
+document.getElementById('closeMenu').addEventListener('click', ()=> document.getElementById('mobileNav').classList.add('hidden'));
+
+/* === Checkout (WhatsApp / Instagram) === */
+document.getElementById('checkoutWhatsapp').addEventListener('click', ()=>{
+  if(cart.length===0){ showToast('Cart is empty'); return; }
+  let orderMsg = "Hello! I want to place an order from Sindhi Crafts:%0A%0A";
+  cart.forEach(item=> orderMsg += `• ${item.title} x ${item.quantity} = PKR ${item.price * item.quantity}%0A`);
+  orderMsg += `%0ATotal: PKR ${cart.reduce((a,i)=>a + i.price * i.quantity,0)}`;
+  // replace YOUR_WHATSAPP_NUMBER with your number without + sign
+  const whatsappNumber = "YOUR_WHATSAPP_NUMBER";
+  const waUrl = `https://wa.me/${whatsappNumber}?text=${orderMsg}`;
+  window.open(waUrl, '_blank');
+});
+
+document.getElementById('checkoutInstagram').addEventListener('click', ()=>{
+  if(cart.length===0){ showToast('Cart is empty'); return; }
+  const instagramHandle = "YOUR_INSTAGRAM_HANDLE"; // replace without @
+  const igUrl = `https://instagram.com/${instagramHandle}`;
+  window.open(igUrl, '_blank');
+  showToast('Opened Instagram — please send a DM with your order.');
+});
+
+/* === Clear Cart button === */
+document.getElementById('clearCart').addEventListener('click', ()=> {
+  if(confirm('Clear cart?')) clearCart();
+});
+
+/* === Initialize page === */
+document.addEventListener('DOMContentLoaded', ()=>{
+  const products = generateProducts();
+  currentProducts = products;
+  renderProducts(products);
+  renderCartSidebar();
+});
+</script>
+</body>
+</html>

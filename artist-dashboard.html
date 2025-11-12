@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Artist Dashboard — Sindhi Crafts</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root {
+  --accent: #7C3E25;
+  --accent-2: #F1C27D;
+  --muted: #F8F6F2;
+  --card: #FFF8F2;
+}
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background-color: var(--muted);
+}
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+</style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="bg-white shadow-md p-4 flex justify-between items-center">
+  <h1 class="text-2xl font-bold text-[color:var(--accent)]">Artist Dashboard</h1>
+  <button id="logoutBtn" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition">Logout</button>
+</header>
+
+<!-- Main Content -->
+<main class="flex-1 p-6 max-w-7xl mx-auto">
+
+  <!-- Artist Info -->
+  <section class="bg-white rounded-xl shadow-md p-6 mb-6">
+    <h2 class="text-2xl font-semibold text-[color:var(--accent)] mb-4">Artist Profile</h2>
+    <div id="profileInfo" class="space-y-1 text-gray-700"></div>
+  </section>
+
+  <!-- Add New Product -->
+  <section class="bg-white rounded-xl shadow-md p-6 mb-6">
+    <h2 class="text-2xl font-semibold text-[color:var(--accent)] mb-4">Add New Product</h2>
+    <form id="productForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input type="text" id="productTitle" placeholder="Product Name" class="px-4 py-2 border rounded-md w-full" required>
+      <input type="number" id="productPrice" placeholder="Price (PKR)" class="px-4 py-2 border rounded-md w-full" required>
+      <select id="productCategory" class="px-4 py-2 border rounded-md w-full" required>
+        <option value="">Select Craft</option>
+        <option value="Pottery">Pottery</option>
+        <option value="Embroidery">Embroidery</option>
+        <option value="Woodwork">Woodwork</option>
+        <option value="Textiles">Textiles</option>
+        <option value="Jewelry">Jewelry</option>
+      </select>
+      <input type="text" id="artistName" placeholder="Artist Name" class="px-4 py-2 border rounded-md w-full" readonly>
+      <textarea id="productDesc" placeholder="Description" class="col-span-full px-4 py-2 border rounded-md w-full" rows="3" required></textarea>
+      <div class="col-span-full">
+        <label class="block mb-1 text-gray-700 font-semibold">Upload Image</label>
+        <input type="file" id="productImage" accept="image/*" class="w-full border rounded-md px-3 py-2 bg-white cursor-pointer" required>
+      </div>
+      <div class="col-span-full flex justify-end">
+        <button type="submit" class="bg-[color:var(--accent)] text-white py-2 px-6 rounded-md hover:opacity-90 transition">
+          Add Product
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Product Listing -->
+  <section class="bg-white rounded-xl shadow-md p-6">
+    <h2 class="text-2xl font-semibold text-[color:var(--accent)] mb-4">My Products</h2>
+    <div id="productsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-white shadow-inner mt-8 py-4 text-center text-gray-600 text-sm">
+  <p>&copy; 2025 Sindhi Crafts | Developed by Team Edutech Solution</p>
+</footer>
+
+<script>
+// Simulated logged-in artist (you can connect with login later)
+let currentArtist = JSON.parse(localStorage.getItem('currentArtist')) || {
+  name: "Ali Hassan",
+  email: "ali@example.com",
+  region: "Sindh, Pakistan",
+  craft: "Embroidery"
+};
+localStorage.setItem('currentArtist', JSON.stringify(currentArtist));
+
+// Profile display
+document.getElementById('artistName').value = currentArtist.name;
+const profileDiv = document.getElementById('profileInfo');
+profileDiv.innerHTML = `
+  <p><strong>Name:</strong> ${currentArtist.name}</p>
+  <p><strong>Email:</strong> ${currentArtist.email}</p>
+  <p><strong>Region:</strong> ${currentArtist.region}</p>
+  <p><strong>Craft:</strong> ${currentArtist.craft}</p>
+`;
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('currentArtist');
+  alert('Logged out successfully!');
+  window.location.href = "artist-login.html";
+});
+
+// Load & Render Products
+let products = JSON.parse(localStorage.getItem('artistProducts')) || [];
+products = products.filter(p => p.artistEmail === currentArtist.email);
+
+const container = document.getElementById('productsContainer');
+
+function renderProducts() {
+  if (products.length === 0) {
+    container.innerHTML = `<p class="col-span-full text-center text-gray-600">No products added yet.</p>`;
+    return;
+  }
+
+  container.innerHTML = products.map((p, i) => `
+    <div class="bg-[color:var(--card)] rounded-xl shadow-md overflow-hidden flex flex-col">
+      <img src="${p.image}" alt="${p.title}" class="h-48 w-full object-cover">
+      <div class="p-4 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">${p.title}</h3>
+          <p class="text-sm text-gray-600 mb-1">${p.desc}</p>
+          <p class="text-sm text-gray-500 italic mb-1">${p.category}</p>
+          <p class="text-amber-700 font-bold">PKR ${p.price}</p>
+        </div>
+        <div class="flex gap-2 mt-3">
+          <button class="edit-btn bg-yellow-500 text-white px-3 py-1 rounded-md hover:opacity-90" data-id="${i}">Edit</button>
+          <button class="delete-btn bg-red-500 text-white px-3 py-1 rounded-md hover:opacity-90" data-id="${i}">Delete</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Delete event
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const index = btn.dataset.id;
+      if (confirm("Are you sure you want to delete this product?")) {
+        products.splice(index, 1);
+        localStorage.setItem('artistProducts', JSON.stringify(products));
+        renderProducts();
+      }
+    });
+  });
+
+  // Edit event
+  document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const index = btn.dataset.id;
+      const p = products[index];
+      const title = prompt("Edit Title", p.title);
+      if (title) p.title = title;
+      const desc = prompt("Edit Description", p.desc);
+      if (desc) p.desc = desc;
+      const price = prompt("Edit Price", p.price);
+      if (price) p.price = parseFloat(price);
+      localStorage.setItem('artistProducts', JSON.stringify(products));
+      renderProducts();
+    });
+  });
+}
+
+// Handle Add Product
+document.getElementById('productForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const fileInput = document.getElementById('productImage');
+  const file = fileInput.files[0];
+  if (!file) return alert("Please upload an image.");
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const newProduct = {
+      title: document.getElementById('productTitle').value,
+      category: document.getElementById('productCategory').value,
+      price: parseFloat(document.getElementById('productPrice').value),
+      desc: document.getElementById('productDesc').value,
+      image: event.target.result,
+      artistEmail: currentArtist.email,
+      artistName: currentArtist.name
+    };
+    products.push(newProduct);
+    localStorage.setItem('artistProducts', JSON.stringify(products));
+    renderProducts();
+    e.target.reset();
+  };
+  reader.readAsDataURL(file);
+});
+
+renderProducts();
+</script>
+
+</body>
+</html>
