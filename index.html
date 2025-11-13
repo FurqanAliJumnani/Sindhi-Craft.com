@@ -87,28 +87,30 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
     </div>
   </header>
 
-  <!-- Mobile menu -->
-  <div id="mobileNav" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 hidden">
-    <div class="bg-white w-64 h-full shadow-lg p-6">
-      <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-[color:var(--accent)] flex items-center justify-center text-white font-bold">HB</div>
-          <div>
-            <div class="font-semibold">Sindhi Crafts</div>
-            <div class="text-xs text-gray-500">Rural crafts</div>
-          </div>
+<!-- Mobile menu -->
+<div id="mobileNav" class="fixed inset-0 z-40 hidden">
+  <div id="mobileOverlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+  <div class="absolute left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300" id="mobileSidebar">
+    <div class="flex items-center justify-between p-6 border-b">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-[color:var(--accent)] flex items-center justify-center text-white font-bold">HB</div>
+        <div>
+          <div class="font-semibold">Sindhi Crafts</div>
+          <div class="text-xs text-gray-500">Rural crafts</div>
         </div>
-        <button id="closeMenu" class="p-2">✕</button>
       </div>
-      <nav class="flex flex-col gap-3">
-        <a href="#home" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
-        <a href="#artists" class="py-2 px-3 rounded hover:bg-gray-50">Artists</a>
-        <a href="#about" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
-        <a href="#contact" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
-        <a href="artist-login.html" class="py-2 px-3 rounded hover:bg-[color:var(--accent)] hover:text-white border border-[color:var(--accent)] text-[color:var(--accent)]">For Artists</a>
-      </nav>
+      <button id="closeMenu" class="text-gray-600 text-xl">✕</button>
     </div>
+    <nav class="flex flex-col mt-4 gap-2 px-4">
+      <a href="#home" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
+      <a href="#artists" class="py-2 px-3 rounded hover:bg-gray-50">Artists</a>
+      <a href="#about" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
+      <a href="#contact" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+      <a href="artist-login.html" class="py-2 px-3 rounded border border-[color:var(--accent)] text-[color:var(--accent)] text-center mt-4">For Artists</a>
+    </nav>
   </div>
+</div>
+
 
   <!-- Main content -->
   <main class="pt-20">
@@ -188,106 +190,109 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
     </p>
 
     <!-- 🌟 Team Cards -->
-    <div class="space-y-5">
-      <!-- Card -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <img src="jawad.jpeg" alt="Jawad Ahmed" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
-            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Jawad Ahmed</h3>
-            <p class="text-gray-700 font-medium">Project Lead/Technical Support</p>
-            <p class="text-sm text-gray-600 mt-1">Email: 
-              <a href="mailto:jawad@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">ali@hunarbazaar.pk</a>
-            </p>
-            <p class="text-sm text-gray-600">Phone: 
-              <a href="tel:+923001234567" class="text-[color:var(--accent)] hover:underline">+92 300 3334567</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Repeat for each team member -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <img src="mukhtiar.jpeg" alt="Mukhtiar Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
-            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Mukhtiar Soomro</h3>
-            <p class="text-gray-700 font-medium">Artisan Coordinator</p>
-            <p class="text-sm text-gray-600 mt-1">Email: 
-              <a href="mailto:mukhtiar@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">hina@hunarbazaar.pk</a>
-            </p>
-            <p class="text-sm text-gray-600">Phone: 
-              <a href="tel:+923001112233" class="text-[color:var(--accent)] hover:underline">+92 300 1212233</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <img src="alamgir.jpeg" alt="Alamgir Lund" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
-            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Alamgir Lund</h3>
-            <p class="text-gray-700 font-medium">Production Manager</p>
-            <p class="text-sm text-gray-600 mt-1">Email: 
-              <a href="mailto:almagir@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">rizwan@hunarbazaar.pk</a>
-            </p>
-            <p class="text-sm text-gray-600">Phone: 
-              <a href="tel:+923004445555" class="text-[color:var(--accent)] hover:underline">+92 300 3345555</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <img src="rania.jpg" alt="Marvi Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
-            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Marvi Soomro</h3>
-            <p class="text-gray-700 font-medium">Communication Manager</p>
-            <p class="text-sm text-gray-600 mt-1">Email: 
-              <a href="mailto:marvi@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">marvi@hunarbazaar.pk</a>
-            </p>
-            <p class="text-sm text-gray-600">Phone: 
-              <a href="tel:+923006667777" class="text-[color:var(--accent)] hover:underline">+92 300 6655777</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <img src="shams.jpeg" alt="Shams ulnisha" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
-            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Shams ulnisha</h3>
-            <p class="text-gray-700 font-medium">Design & Branding</p>
-            <p class="text-sm text-gray-600 mt-1">Email: 
-              <a href="mailto:imran@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">shams@hunarbazaar.pk</a>
-            </p>
-            <p class="text-sm text-gray-600">Phone: 
-              <a href="tel:+923008889999" class="text-[color:var(--accent)] hover:underline">+92 300 8889999</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <img src="rania.jpg" alt="Shazia Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
-          
-            <h3 class="text-xl font-semibold text-[color:var(--accent)]">Shazia Soomro</h3>
-            <p class="text-gray-700 font-medium">Community Outreach</p>
-            <p class="text-sm text-gray-600 mt-1">Email: 
-              <a href="mailto:shazia@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">shazia@hunarbazaar.pk</a>
-            </p>
-            <p class="text-sm text-gray-600">Phone: 
-              <a href="tel:+923009991111" class="text-[color:var(--accent)] hover:underline">+92 300 9991111</a>
-            </p>
-          </div>
-        </div>
+     <div class="space-y-5">
+  <!-- Card -->
+  <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <img src="jawad.jpeg" alt="Jawad Ahmed" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+        <h3 class="text-xl font-semibold text-[color:var(--accent)]">Jawad Ahmed</h3>
+        <p class="text-gray-700 font-medium">Project Lead/Technical Support</p>
+        <p class="text-sm text-gray-600 mt-1">Email: 
+          <a href="mailto:ali@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">ali@hunarbazaar.pk</a>
+        </p>
+        <p class="text-sm text-gray-600">Phone: 
+          <a href="tel:+923003334567" class="text-[color:var(--accent)] hover:underline">+92 300 3334567</a>
+        </p>
       </div>
     </div>
+  </div>
+
+  <!-- Mukhtiar -->
+  <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <img src="mukhtiar.jpeg" alt="Mukhtiar Ali" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+        <h3 class="text-xl font-semibold text-[color:var(--accent)]">Mukhtiar Ali</h3>
+        <p class="text-gray-700 font-medium">Artisan Coordinator</p>
+        <p class="text-sm text-gray-600 mt-1">Email: 
+          <a href="mailto:mukhtiar@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">mukhtiar@hunarbazaar.pk</a>
+        </p>
+        <p class="text-sm text-gray-600">Phone: 
+          <a href="tel:+923001112233" class="text-[color:var(--accent)] hover:underline">+92 300 1212233</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alamgir -->
+  <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <img src="alamgir.jpeg" alt="Alamgir Lund" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+        <h3 class="text-xl font-semibold text-[color:var(--accent)]">Alamgir Lund</h3>
+        <p class="text-gray-700 font-medium">Production Manager</p>
+        <p class="text-sm text-gray-600 mt-1">Email: 
+          <a href="mailto:rizwan@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">rizwan@hunarbazaar.pk</a>
+        </p>
+        <p class="text-sm text-gray-600">Phone: 
+          <a href="tel:+923003345555" class="text-[color:var(--accent)] hover:underline">+92 300 3345555</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marvi -->
+  <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <img src="rania.jpg" alt="Marvi Soomro" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+        <h3 class="text-xl font-semibold text-[color:var(--accent)]">Marvi Soomro</h3>
+        <p class="text-gray-700 font-medium">Finance Manager</p>
+        <p class="text-sm text-gray-600 mt-1">Email: 
+          <a href="mailto:marvi@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">marvi@hunarbazaar.pk</a>
+        </p>
+        <p class="text-sm text-gray-600">Phone: 
+          <a href="tel:+923006667777" class="text-[color:var(--accent)] hover:underline">+92 300 6655777</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shams -->
+  <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <img src="shams.jpeg" alt="Shams Ulnisha" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+        <h3 class="text-xl font-semibold text-[color:var(--accent)]">Shams Ul Nisa</h3>
+        <p class="text-gray-700 font-medium">Design & Branding</p>
+        <p class="text-sm text-gray-600 mt-1">Email: 
+          <a href="mailto:shams@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">shams@hunarbazaar.pk</a>
+        </p>
+        <p class="text-sm text-gray-600">Phone: 
+          <a href="tel:+923008889999" class="text-[color:var(--accent)] hover:underline">+92 300 8889999</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rania -->
+  <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border-l-4 border-[color:var(--accent)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <img src="rania.jpg" alt="Rania Umar" class="w-16 h-16 rounded-full object-cover mb-3 md:mb-0 md:mr-4">
+        <h3 class="text-xl font-semibold text-[color:var(--accent)]">Rania Umar</h3>
+        <p class="text-gray-700 font-medium">Community Outreach</p>
+        <p class="text-sm text-gray-600 mt-1">Email: 
+          <a href="mailto:rania@hunarbazaar.pk" class="text-[color:var(--accent)] hover:underline">rania@hunarbazaar.pk</a>
+        </p>
+        <p class="text-sm text-gray-600">Phone: 
+          <a href="tel:+923009991111" class="text-[color:var(--accent)] hover:underline">+92 300 9991111</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- 💌 Contact Form -->
     <div class="mt-12 bg-white rounded-xl shadow-md p-6 border border-gray-100">
@@ -399,31 +404,26 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
 
 <script>
   const mobileNav = document.getElementById('mobileNav');
+  const mobileSidebar = document.getElementById('mobileSidebar');
   const mobileOverlay = document.getElementById('mobileOverlay');
   const openMenuBtn = document.getElementById('openMenu');
   const closeMenuBtn = document.getElementById('closeMenu');
-  const sidebar = mobileNav.querySelector('div.absolute');
 
-  // Open mobile menu
+  // Open mobile nav
   openMenuBtn.addEventListener('click', () => {
     mobileNav.classList.remove('hidden');
-    sidebar.classList.remove('-translate-x-full');
+    setTimeout(()=> mobileSidebar.classList.remove('-translate-x-full'), 10); // smooth transition
   });
 
-  // Close mobile menu
-  closeMenuBtn.addEventListener('click', () => {
-    sidebar.classList.add('-translate-x-full');
-    setTimeout(()=> mobileNav.classList.add('hidden'), 300); // hide overlay after animation
-  });
-
-  // Close when clicking overlay
-  mobileOverlay.addEventListener('click', () => {
-    sidebar.classList.add('-translate-x-full');
+  // Close mobile nav
+  const closeMobileNav = () => {
+    mobileSidebar.classList.add('-translate-x-full');
     setTimeout(()=> mobileNav.classList.add('hidden'), 300);
-  });
-</script>
-<script>
-/* === Artist Data === */
+  };
+
+  closeMenuBtn.addEventListener('click', closeMobileNav);
+  mobileOverlay.addEventListener('click', closeMobileNav);
+  /* === Artist Data === */
 const artists = [
   { id: 1, name: 'Bhagwati', region: 'Sindh', craft: 'Pottery', bio: 'A third-generation potter using natural glazes.' },
   { id: 2, name: 'Asifa Chandio', region: 'Sindh', craft: 'Embroidery', bio: 'Specializes in fine-thread Sindhi shawls.' },
