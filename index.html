@@ -33,13 +33,18 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
   color: rgba(124,62,37,0.9);
   transform: rotate(12deg);
 }
-
 /* Toast animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fadeIn { animation: fadeIn .28s ease-out; transition: opacity .4s ease; }
+/* Product modal scroll */
+#productModal > div {
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 0 1rem;
+}
 </style>
 </head>
 <body class="bg-[color:var(--muted)] text-gray-800">
@@ -75,7 +80,8 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
           <button id="openMenu" class="md:hidden p-2 rounded-md hover:bg-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
-          <a href="artist-login.html" class="hidden md:inline-block px-4 py-2 rounded-md text-sm font-medium border border-[color:var(--accent)] text-[color:var(--accent)]">For Artists</a>
+          <!-- For Artists always visible -->
+          <a href="artist-login.html" class="inline-block px-4 py-2 rounded-md text-sm font-medium border border-[color:var(--accent)] text-[color:var(--accent)]">For Artists</a>
         </div>
       </div>
     </div>
@@ -99,6 +105,7 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
         <a href="#artists" class="py-2 px-3 rounded hover:bg-gray-50">Artists</a>
         <a href="#about" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
         <a href="#contact" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+        <a href="artist-login.html" class="py-2 px-3 rounded hover:bg-[color:var(--accent)] hover:text-white border border-[color:var(--accent)] text-[color:var(--accent)]">For Artists</a>
       </nav>
     </div>
   </div>
@@ -110,11 +117,11 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
       <div class="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[color:var(--accent)]">Sindhi Craftt</h1>
-            <p class="text-lg text-gray-700 mb-6">A curated marketplace showcasing rural artisans — pottery, embroidery, woodwork and more. Discover hand-made products and stories behind each craft.</p>
-            <div class="flex gap-3">
-              <a href="#products" class="inline-block px-5 py-3 rounded-md bg-[color:var(--accent)] text-white font-medium shadow">Shop All</a>
-              <a href="#artists" class="inline-block px-5 py-3 rounded-md border border-[color:var(--accent)] text-[color:var(--accent)]">Meet Artists</a>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-[color:var(--accent)]">Sindhi Craftt</h1>
+            <p class="text-base sm:text-lg text-gray-700 mb-6">A curated marketplace showcasing rural artisans — pottery, embroidery, woodwork and more. Discover hand-made products and stories behind each craft.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="#products" class="inline-block px-5 py-3 rounded-md bg-[color:var(--accent)] text-white font-medium shadow text-center">Shop All</a>
+              <a href="#artists" class="inline-block px-5 py-3 rounded-md border border-[color:var(--accent)] text-[color:var(--accent)] text-center">Meet Artists</a>
             </div>
           </div>
           <div class="rounded-2xl overflow-hidden shadow-lg bg-[color:var(--card)] p-4">
@@ -133,7 +140,7 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
               <button class="filter-btn px-3 py-2 rounded-full text-sm border" data-cat="woodwork">Woodwork</button>
             </div>
             <div class="flex items-center gap-3">
-              <input id="searchInput" type="search" placeholder="Search products or artists..." class="px-3 py-2 border rounded-md w-56 text-sm" />
+              <input id="searchInput" type="search" placeholder="Search products or artists..." class="px-3 py-2 border rounded-md w-full sm:w-56 text-sm" />
               <select id="sortSelect" class="px-3 py-2 border rounded-md text-sm">
                 <option value="default">Sort</option>
                 <option value="price-asc">Price: Low → High</option>
@@ -143,7 +150,7 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
           </div>
 
           <!-- Products grid -->
-          <div id="products" class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+          <div id="products" class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
         </div>
       </div>
     </section>
@@ -156,10 +163,9 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
           <div class="text-sm text-gray-600">Tap any artist to view profile & their work</div>
         </div>
 
-        <div id="artistsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+        <div id="artistsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6"></div>
       </div>
     </section>
-
     <!-- About -->
     <section id="about" class="py-12 bg-white">
       <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
