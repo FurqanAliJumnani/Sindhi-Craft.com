@@ -370,7 +370,58 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
 
   <!-- Toast Container -->
   <div id="toastContainer" class="fixed bottom-4 right-4 space-y-2 z-50"></div>
+<!-- Mobile menu -->
+<div id="mobileNav" class="fixed inset-0 z-40 hidden">
+  <!-- Overlay -->
+  <div id="mobileOverlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 
+  <!-- Sidebar -->
+  <div class="absolute left-0 top-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300">
+    <div class="flex items-center justify-between p-6 border-b">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-[color:var(--accent)] flex items-center justify-center text-white font-bold">HB</div>
+        <div>
+          <div class="font-semibold">Sindhi Crafts</div>
+          <div class="text-xs text-gray-500">Rural crafts</div>
+        </div>
+      </div>
+      <button id="closeMenu" class="text-gray-600 text-xl">✕</button>
+    </div>
+    <nav class="flex flex-col mt-4 gap-2 px-4">
+      <a href="#home" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
+      <a href="#artists" class="py-2 px-3 rounded hover:bg-gray-50">Artists</a>
+      <a href="#about" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
+      <a href="#contact" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+      <a href="artist-login.html" class="py-2 px-3 rounded border border-[color:var(--accent)] text-[color:var(--accent)] text-center mt-4">For Artists</a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const openMenuBtn = document.getElementById('openMenu');
+  const closeMenuBtn = document.getElementById('closeMenu');
+  const sidebar = mobileNav.querySelector('div.absolute');
+
+  // Open mobile menu
+  openMenuBtn.addEventListener('click', () => {
+    mobileNav.classList.remove('hidden');
+    sidebar.classList.remove('-translate-x-full');
+  });
+
+  // Close mobile menu
+  closeMenuBtn.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    setTimeout(()=> mobileNav.classList.add('hidden'), 300); // hide overlay after animation
+  });
+
+  // Close when clicking overlay
+  mobileOverlay.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    setTimeout(()=> mobileNav.classList.add('hidden'), 300);
+  });
+</script>
 <script>
 /* === Artist Data === */
 const artists = [
