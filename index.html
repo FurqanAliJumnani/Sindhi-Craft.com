@@ -155,6 +155,7 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
           <div id="products" class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
         </div>
       </div>
+
     </section>
 <!-- Artists -->
 <section id="artists" class="py-12">
@@ -537,12 +538,12 @@ const generateProducts = () => {
   let products = [];
   categories.forEach((cat, index) => {
     const artist = artists[index];
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 21; i++) {
       products.push({
         id: `${cat}-${i}`,
         title: `${cat.charAt(0).toUpperCase() + cat.slice(1)} ${i}`,
         category: cat,
-        price: 1000 + i * 50,
+        price: 800 + i * 50,
         image: `assets/${cat}/${i}.jpeg`, // default .jpeg; fallback in <img>
         artistId: artist.id,
         desc: `Authentic ${cat} handcrafted by ${artist.name} from ${artist.region}.`
@@ -686,5 +687,59 @@ document.addEventListener('DOMContentLoaded', ()=>{
   renderCartSidebar();
 });
 </script>
+<script>
+let currentPage = 1;
+let itemsPerPage = 8;
+
+function renderProducts() {
+  const productsContainer = document.getElementById("products");
+
+  // Apply search and filter
+  let filtered = products.filter(product => 
+    product.name.toLowerCase().includes(searchInput.value.toLowerCase())
+  );
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  document.getElementById("pageNumber").textContent = `Page ${currentPage} of ${totalPages}`;
+
+  document.getElementById("prevPage").disabled = currentPage === 1;
+  document.getElementById("nextPage").disabled = currentPage === totalPages;
+
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
+  const paginatedProducts = filtered.slice(start, end);
+
+  // Render
+  productsContainer.innerHTML = paginatedProducts
+    .map(
+      p => `
+      <div class="bg-white rounded-xl shadow p-3">
+        <img src="${p.image}" class="w-full h-40 object-cover rounded-lg">
+        <h3 class="font-semibold mt-2">${p.name}</h3>
+        <p class="text-gray-600 text-sm">${p.category}</p>
+        <p class="text-[color:var(--accent)] font-bold mt-1">Rs ${p.price}</p>
+      </div>
+    `
+    )
+    .join("");
+}
+
+document.getElementById("prevPage").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderProducts();
+  }
+});
+document.getElementById("nextPage").addEventListener("click", () => {
+  currentPage++;
+  renderProducts();
+});
+
+// First load
+renderProducts();
+</script>
+
 </body>
 </html>
