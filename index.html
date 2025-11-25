@@ -97,7 +97,6 @@ h1,h2,h3{font-family: 'Playfair Display', serif;}
         <div>
           <div class="font-medium text-[9px]">Sindhi Crafts</div>
           <div class="text-[7px] text-gray-500">Rural crafts</div>
-
         </div>
       </div>
       <button id="closeMenu" class="text-gray-600 text-xl">✕</button>
@@ -535,22 +534,37 @@ function renderCartSidebar(){
 }
 
 /* === Generate Products (jpeg default) === */
+
+const priceRules = {
+  embroidery: (i) => 4000 + i * 150,
+  pottery:    (i) => 400 + i * 10,
+  woodwork:   (i) => 1200 + i * 40,
+};
+
+
 const generateProducts = () => {
   let products = [];
+
   categories.forEach((cat, index) => {
     const artist = artists[index];
-    for (let i = 1; i <= 21; i++) {
+
+    for (let i = 1; i <= 18; i++) {
+
+      const priceFunction = priceRules[cat];  // pick formula for category
+      const price = priceFunction ? priceFunction(i) : 1000; // fallback price
+
       products.push({
         id: `${cat}-${i}`,
         title: `${cat.charAt(0).toUpperCase() + cat.slice(1)} ${i}`,
         category: cat,
-        price: 800 + i * 50,
-        image: `assets/${cat}/${i}.jpeg`, // default .jpeg; fallback in <img>
+        price: price,    // category-wise price!
+        image: `assets/${cat}/${i}.jpeg`,
         artistId: artist.id,
         desc: `Authentic ${cat} handcrafted by ${artist.name} from ${artist.region}.`
       });
     }
   });
+
   return products;
 };
 
@@ -744,3 +758,6 @@ renderProducts();
 
 </body>
 </html>
+
+
+
